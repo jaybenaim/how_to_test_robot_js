@@ -1,66 +1,75 @@
 const {newRobot, station, isWorkday, prioritizeTasks}  = require("./robot.js");
 
+
 // remove .skip when you're ready to implement the test
-test.skip('test_that_foreign_robot_needing_repairs_sent_to_station_1', () => {
-  // arrange
+test('test_that_foreign_robot_needing_repairs_sent_to_station_1', () => {
 
-  // act
+  let robot = newRobot(false, false, false) 
 
-  // assert
+  robot.needs_repairs = true 
+  robot.foreign_model = true 
+
+  expect(station(robot)).toEqual(1)
+
 });
 
-test.skip('test_that_vintage_robot_needing_repairs_sent_to_station_2', () => {
-  // arrange
+test('test_that_vintage_robot_needing_repairs_sent_to_station_2', () => {
 
-  // act
+  let robot = newRobot(false, false, false) 
 
-  // assert
+  robot.needs_repairs = true 
+  robot.vintage_model = true 
+
+
+  expect(station(robot)).toEqual(2)
+
 });
 
-test.skip('test_that_standard_robot_needing_repairs_sent_to_station_3', () => {
-  // arrange
+test('test_that_standard_robot_needing_repairs_sent_to_station_3', () => {
 
-  // act
+  let robot = newRobot(false, false, false) 
 
-  // assert
+  robot.needs_repairs = true 
+
+  expect(station(robot)).toEqual(3)
+
 });
 
-test.skip('test_that_robot_in_good_condition_sent_to_station_4', () => {
-  // arrange
-
-  // act
-
-  // assert
+test('test_that_robot_in_good_condition_sent_to_station_4', () => {
+  let robot = newRobot(false, false, false) 
+  expect(station(robot)).toEqual(4)
 });
 
-test.skip('test_prioritize_tasks_with_empty_todo_list_returns_negative_one', () => {
-  // arrange
+test('test_prioritize_tasks_with_empty_todo_list_returns_negative_one', () => {
 
-  // act
-
-  // assert
+  let robot = newRobot(false, false, false) 
+  robot.todos = [] 
+  expect(prioritizeTasks(robot)).toEqual(-1)
 })
 
-test.skip('test_prioritize_tasks_with_todos_returns_max_todo_value', () => {
-  // arrange
+test('test_prioritize_tasks_with_todos_returns_max_todo_value', () => {
+  let robot = newRobot(false, false, false) 
+  let todoList = ['shop', 'eat', 'dance'] 
+  robot.todos = todoList 
+  expect(prioritizeTasks(robot)).toEqual(Math.max(...robot.todos))
 
-  // act
-
-  // assert
 });
 
-test.skip('test_workday_on_day_off_returns_false', () => {
-  // arrange
+test('test_workday_on_day_off_returns_false', () => {
+  let robot = newRobot(false, false, false) 
+  robot.dayOff = 'monday' 
 
-  // act
+  expect(isWorkday(robot, 'monday')).toBe(false)
 
-  // assert
+
+
 });
 
-test.skip('test_workday_not_day_off_returns_true', () => {
-  // arrange
+test('test_workday_not_day_off_returns_true', () => {
 
-  // act
 
-  // assert
+  let robot = newRobot(false, false, false) 
+  robot.dayOff = 'monday' 
+  expect(isWorkday(robot, 'tuesday')).toBe(true)
+
 });
